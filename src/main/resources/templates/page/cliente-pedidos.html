@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>CLIENTES</title>
+</head>
+<style type="text/css">
+
+    body {
+      background-color: #DADADA;
+    }
+
+</style>
+<body>
+<nav>
+    <div class="nav-wrapper" style="background-color: #00B5AD;">
+            <a href="#" class="brand-logo center">Pedidos do Cliente</a>
+         <a href="/listarCliente" class="waves-effect waves-light btn-small">Voltar</a>
+    </div>
+</nav>
+
+<form>
+    <div class="input-field">
+        <input id="search" type="search" required >
+        <label class="label-icon" for="search" ><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+    </div>
+</form>
+
+
+<table class="responsive-table" method="post">
+    <thead>
+    <tr>
+        <th>Cliente</th>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "pedido: ${pedidos}">
+        <td style="cursor: pointer;"><span th:text="${cliente.name}"></span></td>
+        <td><span th:text="${pedido.produto.name}"></span></td>
+        <td><span th:text="${pedido.quantidade}"></span></td>
+        <td><span th:text="${pedido.pedidoStatus}"></span></td>
+        <td><span th:text="${pedido.moment}"></span></td>
+
+        <td><a type="submit" class="waves-effect waves-light btn-small"
+               onclick="M.toast({html: 'Pedido Deletado'})" th:href="@{/deletePedido/{id}(id=${pedido.id})}" style="background-color: #d32f2f;"><i class="tiny material-icons left">delete</i>Delete</a></td>
+        <td><a type="submit" class="waves-effect waves-light btn-small"th:href="@{/editPedido/{id}(id=${pedido.id})}"><i class="tiny material-icons left">edit</i>Update</a></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
